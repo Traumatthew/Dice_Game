@@ -21,34 +21,70 @@
 // each roll counts as a stroke. the lowest amount of rolls wins.
 
 // the players will roll all 6 dice at once.
-// if rolled doubles or more player keeps dice.
+// if rolled doubles or more player keeps those dice.
 
 // first need to create holes.
 // create score card
 // create functions for random dice allowing user to select dice.
-// let die1 = [1, 2, 3, 4];
-// let die2 = [1, 2, 3, 4, 5, 6];
 
 
 // this function rolls all the dice at the same time giving you 6 numbers for the 6 different dice.
 
-
-function rollDie(Array){
+function playGame() { // master function
     let diceArray = [4, 6, 8, 10, 12, 18];
+    let playerRolls = rollDice(diceArray);
+    let pairs = searchForDuplicates(playerRolls);
+    console.log(pairs);
+    // searchForDuplicates(playerRolls);
+}
+
+function rollDice(array){ //rolls all the dice let dice Array = [4, 6, 8, 10, 12, 18];
     let rolls = [];
-    let i;
-    // for loop
-        //rolls.push(theNumber)
-    for (i = 0; i < diceArray.length; i++) {
-        let roll = Math.floor(Math.random()* diceArray[i] )+1;
+    for (let i = 0; i < array.length; i++) {
+        let roll = Math.floor(Math.random()* array[i] )+1;
         rolls.push(roll);
     }
-
     console.log(rolls);
     return rolls;
 }
 
+function searchForDuplicates(rolls) {
+    rolls.sort();
 
-// player one rolls
+    // find if numbers were hit
+    for(let i = 0; i < rolls.length; i++) { // loops over array to search for duplicates for
+        for(let j = i + 1; j < rolls.length; j++) { // loop over array to perform the search for duplicates for a number
+            if(rolls[j] === rolls[i]) {
 
-// function golferOne(rollDie)
+                // duplicate!
+                console.log('You Win!');
+                return "WINNER";
+            }
+        }
+    }
+
+    return "LOSER";
+}
+
+
+
+
+
+
+// function searchForDuplicates(rolls) {
+//     rolls.sort();
+
+//     // find if numbers were hit
+//     for(let i = 0; i < rolls.length; i++) { // loops over array to search for duplicates for
+//         for(let j = i + 1; j < rolls.length; j++) { // loop over array to perform the search for duplicates for a number
+//             if(rolls[j] === rolls[i]) {
+
+//                 // duplicate!
+//                 console.log('You Win!');
+//                 return "WINNER";
+//             }
+//         }
+//     }
+
+//     return "LOSER";
+// }
